@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+
+//AuthHttp - allows for individual and explicit authenticated HTTP requests
 import { AuthHttp } from 'angular2-jwt';
 
 const styles = require('./home.css');
@@ -17,12 +19,14 @@ export class Home {
   response: string;
   api: string;
 
+
   constructor(public router: Router, public http: Http, public authHttp: AuthHttp) {
     this.jwt = localStorage.getItem('id_token');
     this.decodedJwt = this.jwt && window.jwt_decode(this.jwt);
   }
 
   logout() {
+    // REMOVE ID FROM THE LOCAL STORE AND ROUTE USER OUT TO LOGIN SCREEN
     localStorage.removeItem('id_token');
     this.router.navigate(['login']);
   }

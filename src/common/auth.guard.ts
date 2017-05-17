@@ -7,12 +7,16 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
-  canActivate() {
+  canActivate(): boolean {
+
     if (tokenNotExpired()) {
       return true;
     }
 
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
+    // this route was in here but this route guard just needs to return a boolean not a route
+    // as well so not sure why the template had that in there. 
+    
     return false;
   }
 }

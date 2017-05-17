@@ -1,15 +1,35 @@
 <div class="login jumbotron center-block">
+
   <h1>Login</h1>
-  <form role="form" (submit)="login($event, username.value, password.value)">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" #username class="form-control" id="username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" #password class="form-control" id="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-    <a [routerLink]="['/signup']">Click here to Signup</a>
-</form>
+
+  <!-- SENDING USER NAME AND PASSWORD FROM FORM TO LOGIN FUNCTION -->
+  
+  <form role="form" (submit)="login()" [formGroup]="loginForm">
+
+     
+
+      <!--USER NAME INPUT  -->
+      <ts-textbox 
+        inputFor="username" 
+        hasError="{{userNameError}}"
+        [messages]="userNameMessage" >
+        <input formControlName="userName" type="text" class="form-control" id="username" placeholder="Username">
+      </ts-textbox>
+      
+
+    
+      <!--PASSWORD INPUT-->
+      <div class="form-group" [ngClass]="{'has-error': passwordError }" >
+        <label for="password">Password</label>
+        <input formControlName="password"  type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+
+      <!--SUBMIT BUTTON-->
+      <button [disabled]="!loginForm.valid"  type="submit" class="btn btn-default">Submit</button>
+      
+      <!--GO TO SIGNUP LINKE-->
+      <a [routerLink]="['/signup']">Click here to Signup</a>
+
+  </form>
+
 </div>
